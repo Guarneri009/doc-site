@@ -1,0 +1,22 @@
+version: "3"
+services:
+  vscode:
+    env_file: .env
+    image: node:slim
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile
+    tty: true
+    ports:
+      - 3000:3000
+    environment:
+      # for linx use xhost +local: command
+      - DISPLAY=${DISPLAY}
+      - XDG_RUNTIME_DIR=/tmp/runtime-root
+    #devices:
+    #  # web camera
+    #  - /dev/video0:/dev/video0:mwr
+    volumes:
+      # for linx or use windows docker desktop
+      - ..:/workspace:cached
+      - /tmp/.X11-unix:/tmp/.X11-unix
