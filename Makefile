@@ -2,4 +2,4 @@ ls:
 	ls
 
 deploy:
-	GIT_USER=Guarneri009 npm run deploy
+	export USE_SSH=true && GIT_USER=Guarneri009 npm run deploy

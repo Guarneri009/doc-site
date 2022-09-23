@@ -28,7 +28,20 @@ ENV TZ=Asia/Tokyo
 # ENV LANGUAGE=ja_JP:ja
 # ENV LC_ALL=ja_JP.UTF-8
 
-WORKDIR /opt
+RUN groupadd --gid 1000 node \
+  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+
+# ARG USERNAME=user
+# ARG GROUPNAME=user
+# ARG UID=1000
+# ARG GID=1000
+# RUN groupadd -g $GID $GROUPNAME && \
+#     useradd -m -s /bin/bash -u $UID -g $GID $USERNAME
+# USER $USERNAME
+# WORKDIR /home/$USERNAME/
+
+ WORKDIR /opt
+
 EXPOSE 3000
 
 RUN     apt-get update && \
@@ -36,6 +49,7 @@ RUN     apt-get update && \
         sudo \
         tzdata \
         curl \
+        ca-certificates \
         ssh \
         git \
         wget \
@@ -68,4 +82,7 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh \
      && apt-get install -y nodejs \
      && npm install -g npm   
 
+USER node
+
+CMD ["bash"]
 
