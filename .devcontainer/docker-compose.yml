@@ -9,14 +9,7 @@ services:
     tty: true
     ports:
       - 3000:3000
-    environment:
-      # for linx use xhost +local: command
-      - DISPLAY=${DISPLAY}
-      - XDG_RUNTIME_DIR=/tmp/runtime-root
-    #devices:
-    #  # web camera
-    #  - /dev/video0:/dev/video0:mwr
     volumes:
       # for linx or use windows docker desktop
       - ~/.ssh:/home/node/.ssh:cached
-      - ..:/workspace:cached
+      - ..:/home/node/workspace:cached

@@ -28,8 +28,11 @@ ENV TZ=Asia/Tokyo
 # ENV LANGUAGE=ja_JP:ja
 # ENV LC_ALL=ja_JP.UTF-8
 
-RUN groupadd --gid 1000 node \
-  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+# RUN groupadd --gid 1000 node \
+#   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+
+# chpasswd コマンドでパスワード設定をする。root ユーザーに password というパスワードを設定。
+# RUN echo 'root:password' | chpasswd
 
 # ARG USERNAME=user
 # ARG GROUPNAME=user
@@ -82,7 +85,26 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh \
      && apt-get install -y nodejs \
      && npm install -g npm   
 
-USER node
+ARG username=node
+ARG wkdir=/home/node
+
+# echo "username:password" | chpasswd
+# root password is "root"
+
+RUN echo "root:root" | chpasswd && \
+    adduser --disabled-password --gecos "" "${username}" && \
+    echo "${username}:${username}" | chpasswd && \
+    echo "%${username}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers.d/${username} && \
+    chmod 0440 /etc/sudoers.d/${username} 
+    
+WORKDIR ${wkdir}
+RUN chown ${username}:${username} ${wkdir}
+USER ${username}
+
+# for powerline-shell
+RUN echo -e 'function _update_ps1() { \n  PS1=$(powerline-shell $?)\n }' >> ~/.bashrc
+RUN echo -e 'if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then\n    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"\nfi\n'  >> ~/.bashrc
+RUN source ~/.bashrc
 
 CMD ["bash"]
 

@@ -1,6 +1,6 @@
 {
 	"name": "docusaurus-site",
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/home/node/workspace",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "docusaurus"
 }
