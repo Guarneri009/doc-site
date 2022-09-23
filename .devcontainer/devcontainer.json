@@ -1,6 +1,6 @@
 {
-	"name": "vscode",
+	"name": "docusaurus-site",
 	"workspaceFolder": "/workspace",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "vscode"
+	"service": "docusaurus"
 }

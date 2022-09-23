@@ -1,11 +1,11 @@
 version: "3"
 services:
-  vscode:
+  docusaurus:
     env_file: .env
-    image: node:slim
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile
+    #image: node:slim
+    build:
+      context: .
+      dockerfile: Dockerfile
     tty: true
     ports:
       - 3000:3000
