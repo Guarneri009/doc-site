@@ -2,5 +2,8 @@
 	"name": "docusaurus-site",
 	"workspaceFolder": "/workspace",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "docusaurus"
+	"service": "docusaurus",
+	"extensions": [
+		"mhutchie.git-graph"
+	]
 }

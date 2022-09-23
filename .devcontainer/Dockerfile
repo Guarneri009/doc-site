@@ -36,23 +36,25 @@ RUN     apt-get update && \
         sudo \
         tzdata \
         curl \
+        ca-certificates \
         ssh \
         git \
         wget \
         unzip \
         iputils-ping \
         net-tools \
-        vim
+        vim \
+        make
 
 # python3
-RUN apt-get install -y --no-install-recommends build-essential libssl-dev libffi-dev python3-dev python3-pip
+#RUN apt-get install -y --no-install-recommends build-essential libssl-dev libffi-dev python3-dev python3-pip
 
 # for powerline-shell
-RUN apt-get install -y --no-install-recommends fonts-powerline
-RUN pip install powerline-shell
-RUN echo -e 'function _update_ps1() { \n  PS1=$(powerline-shell $?)\n }' >> ~/.bashrc
-RUN echo -e 'if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then\n    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"\nfi\n'  >> ~/.bashrc
-RUN source ~/.bashrc
+# RUN apt-get install -y --no-install-recommends fonts-powerline
+# RUN pip install powerline-shell
+# RUN echo -e 'function _update_ps1() { \n  PS1=$(powerline-shell $?)\n }' >> ~/.bashrc
+# RUN echo -e 'if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then\n    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"\nfi\n'  >> ~/.bashrc
+# RUN source ~/.bashrc
 
 # for node NG
 # RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -63,9 +65,9 @@ RUN source ~/.bashrc
 #         && npm config set unsafe-perm true
 
 # for node
-RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh \
-     && bash nodesource_setup.sh \
-     && apt-get install -y nodejs \
-     && npm install -g npm   
+RUN     curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+RUN     bash nodesource_setup.sh
+RUN     apt-get install -y nodejs
+RUN     npm install -g npm
 
 
