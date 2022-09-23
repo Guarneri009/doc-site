@@ -36,6 +36,7 @@ RUN     apt-get update && \
         sudo \
         tzdata \
         curl \
+        ssh \
         git \
         wget \
         unzip \
