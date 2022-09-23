@@ -18,5 +18,6 @@ services:
     #  - /dev/video0:/dev/video0:mwr
     volumes:
       # for linx or use windows docker desktop
+      - ~/.ssh:/root/.ssh:cached
       - ..:/workspace:cached
       - /tmp/.X11-unix:/tmp/.X11-unix
