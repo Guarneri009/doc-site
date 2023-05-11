@@ -1,0 +1,10 @@
+{
+	"name": "docusaurus-site",
+	"workspaceFolder": "/home/node/workspace",
+	"dockerComposeFile": "./docker-compose.yml",
+	"service": "docusaurus",
+	"extensions": [
+		"mhutchie.git-graph",
+		"oderwat.indent-rainbow"
+	]
+}
